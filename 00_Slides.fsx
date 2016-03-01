@@ -170,5 +170,5 @@ let tree = Branch (Branch (Branch (Leaf 2,Leaf 3),Leaf 7),Leaf 1)
 match tree with
 | Leaves (items,root) -> 
     printfn "%A" root
-    for item in items do 
-      printfn "%A" items
+    for item in items do
+      printfn "%A" item
