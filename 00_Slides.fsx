@@ -18,7 +18,7 @@ for i in 1 .. 100 do
   | 0,0 -> printfn "FizzBuzz"
   | 0,_ -> printfn "Fizz"
   | _,0 -> printfn "Buzz"
-  | n   -> printfn "%s" (string n)
+  | _,_ -> printfn "%s" (string n)
 
 (* ________________________________________________________________________________ *)
 
@@ -109,7 +109,7 @@ let (|Fizz|Buzz|FizzBuzz|Num|) n =
   | 0,0 -> FizzBuzz
   | 0,_ -> Fizz
   | _,0 -> Buzz
-  | n   -> Num n
+  | _,_   -> Num n
 
 for i in 1 .. 100 do
   match i with
