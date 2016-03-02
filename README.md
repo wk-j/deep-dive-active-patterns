@@ -1,5 +1,5 @@
 # DeepDive_ActivePatterns
-(Nearly) Everything you Ever Wanted to Know About Active Patterns (but Were Afraid to Ask)
+(Nearly) Everything you Ever Wanted to Know About Active Patterns (but Were Afraid to Ask)
 
 Slides and scripts about using Active Patterns in F#.
 
