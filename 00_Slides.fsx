@@ -18,7 +18,7 @@ for i in 1 .. 100 do
   | 0,0 -> printfn "FizzBuzz"
   | 0,_ -> printfn "Fizz"
   | _,0 -> printfn "Buzz"
-  | _,_ -> printfn "%s" (string n)
+  | _,_ -> printfn "%s" (string i)
 
 (* ________________________________________________________________________________ *)
 
