@@ -7,3 +7,4 @@ So far, this talk has been given at:
 
 * Code Mash 2015
 * Philly Code Camp 2015.1
+* Compose (NYC) 2016
