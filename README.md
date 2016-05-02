@@ -5,7 +5,7 @@
 
 ## Map.TryFind
 
-```
+```fsharp
 let rnd = Random DateTime.Now.Millisecond
 let items = Map.ofSeq [ for n in  1  .. 26  do
                         for c in 'a' .. 'z' -> (n,c)]
@@ -37,7 +37,13 @@ for i in 1 .. 100 do
 
 # Acitve Patterns
 
-## Single-case Total Patterns
+- [x] Single-case Total Patterns
+- [ ] Multi-case Active Patterns
+- [ ] Partial Patterns
+- [ ] Parameterized Patterns
+- [ ] First-class Patterns
+
+## Single-case Active Patterns
 
 ```fsharp
 let (|Rect|) (x :Complex) =
@@ -78,9 +84,88 @@ let determineFileType filePath =
         -> printfn "Unknown file type [%s]" filePath
 ```
 
-- สามารถสร้าง Single-case pattern หลายอันแล้วทำการ Match cross กันได้
+- Single-case pattern หลายอันและสามารถ match cross กันได้
 
-## Deep Dive Active Patterns
+## Multi-case Acitve Patterns
+
+```fsharp
+let (|Fizz|Buzz|FizzBuzz|Num|) n =
+  match n % 3, n % 5 with
+  | 0,0 -> FizzBuzz
+  | 0,_ -> Fizz
+  | _,0 -> Buzz
+  | _,_   -> Num n
+
+for i in 1 .. 100 do
+  match i with
+  | FizzBuzz  -> printfn "FizzBuzz"
+  | Fizz      -> printfn "Fizz"
+  | Buzz      -> printfn "Buzz"
+  | Num n     -> printfn "%s" (string n)
+```
+
+## Partial Active Patterns
+
+```fsharp
+let (|Fizz|_|) value =
+  if value % 3 = 0 then Some () else None
+
+let (|Buzz|_|) value =
+  if value % 5 = 0 then Some () else None
+
+for i in 1 .. 100 do
+  match i with
+  | Fizz & Buzz -> printfn "FizzBuzz"
+  | Fizz        -> printfn "Fizz"
+  | Buzz        -> printfn "Buzz"
+  | n           -> printfn "%s" (string n)
+```
+
+## Parameterized Acitve Patterns
+
+```fsharp
+let (|Groups|_|) pattern value =
+  let m = Regex.Match (value,pattern)
+  match m.Success,m.Groups.Count with
+  | true,n when n > 0 ->  [ for g in m.Groups -> g.Value ]
+                          |> List.tail // drop "root" match
+                          |> Some
+  | _                 ->  None
+
+match "37206" with
+| Groups "(\d{5})([-]\d{4})?" [ zip; _ ] -> printfn "Postal code: %s" zip
+| otherwise                              -> printfn "Can't ship to: %s" otherwise
+```
+
+## First-class Active Patterns
+
+```fsharp
+type Tree<'T> =
+  | Leaf   of 'T
+  | Branch of Tree<'T> * Tree<'T>
+
+let (|Branch|_|) = function
+  | Branch (l,r) -> Some (l,r)
+  | _            -> None
+
+let collect (|Pred|_|) root =
+  let rec loop values node =
+    match  node with
+    | Pred (v,next) -> loop (v::values) next
+    | _             -> List.rev values, root
+  loop [] root
+
+let (|Leaves|) root = collect (|Branch|_|) root
+
+let tree = Branch (Branch (Branch (Leaf 2,Leaf 3),Leaf 7),Leaf 1)
+match tree with
+| Leaves (items,root) ->
+    printfn "%A" root
+    for item in items do
+      printfn "%A" item
+```
+
+# Deep Dive Active Patterns
 
 (Nearly) Everything you Ever Wanted to Know About Active Patterns (but Were Afraid to Ask)
 
