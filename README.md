@@ -16,10 +16,10 @@ match items.TryFind n with
 | None        -> printfn "key not found"
 ```
 
-- TryFind ของ Map จะ return ค่าเป็น Option 't
+- `TryFind` ของ `Map` จะ Return ค่าเป็น `Option 't`
 - เมื่อใช้ `match items.TryFind n` จะได้ค่าที่เป็นไปได้สอบแบบ
-    - `Some letter` คือหาค่าที่มี key `n` ใน Map เจอโดยค่านั้นคือ   `letter`
-    - None ไม่เจอ key `n`
+    - `Some letter` คือหาค่าที่มี key `n` ใน `Map` เจอโดยค่านั้นคือ   `letter`
+    - `None` ไม่เจอ key `n`
 
 ## Data Decomposition
 
@@ -32,8 +32,8 @@ for i in 1 .. 100 do
   | _,_ -> printfn "%s" (string i)
 ```
 
-- สามารถ match ค่ามากกว่า 1 pattern พร้อมกัน
-- Match case ที่ได้จะถูก decompose เป็น tuple (ขั้นด้วยเครื่องหมาย `,`)
+- สามารถ Match ค่ามากกว่า 1 Pattern พร้อมกัน
+- Match case ที่ได้จะถูก Decompose เป็น `Tuple` (ขั้นด้วยเครื่องหมาย `,`)
 
 # Acitve Patterns
 
@@ -65,8 +65,8 @@ let mul one two =
    ,Polar (m2,p2) -> Complex (m1 + m2,p1 + p2)
 ```
 
-- เป็น Active pattern ที่ case เดียว
-- ประโยชน์คือใช้ transform input
+- เป็น Active pattern ที่ Case เดียว
+- ประโยชน์คือใช้ Transform input
 
 ```fsharp
 let (|FileExtension|) filePath = Path.GetExtension(filePath)
@@ -86,7 +86,7 @@ let determineFileType filePath =
         -> printfn "Unknown file type [%s]" filePath
 ```
 
-- Single-case pattern หลายอันและสามารถ match cross กันได้
+- Single-case pattern หลายอันและสามารถ Match cross กันได้
 
 ## Multi-case Acitve Patterns
 
@@ -125,7 +125,7 @@ for i in 1 .. 100 do
   | n           -> printfn "%s" (string n)
 ```
 
-- เป็น Active pattern ที่ return ค่าเป็น Option
+- เป็น Active pattern ที่ Return ค่าเป็น Option
 
 ## Parameterized Acitve Patterns
 
