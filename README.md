@@ -37,11 +37,13 @@ for i in 1 .. 100 do
 
 # Acitve Patterns
 
-- [x] Single-case Total Patterns
-- [ ] Multi-case Active Patterns
-- [ ] Partial Patterns
-- [ ] Parameterized Patterns
-- [ ] First-class Patterns
+เป็นฟีเจอร์ที่ช่วยให้เขียน Pattern matching ได้ง่ายขึ้น
+
+- [x] Single-case Active Patterns
+- [x] Multi-case Active Patterns
+- [x] Partial Patterns
+- [x] Parameterized Patterns
+- [x] First-class Patterns
 
 ## Single-case Active Patterns
 
@@ -104,6 +106,8 @@ for i in 1 .. 100 do
   | Num n     -> printfn "%s" (string n)
 ```
 
+- มีหลาย Case ขึ้นอยู่กับเงื่อนไขที่เขียนไว้ว่าต้องการ Expose case ไหนออกมา
+
 ## Partial Active Patterns
 
 ```fsharp
@@ -121,6 +125,8 @@ for i in 1 .. 100 do
   | n           -> printfn "%s" (string n)
 ```
 
+- เป็น Active pattern ที่ return ค่าเป็น Option
+
 ## Parameterized Acitve Patterns
 
 ```fsharp
@@ -136,6 +142,8 @@ match "37206" with
 | Groups "(\d{5})([-]\d{4})?" [ zip; _ ] -> printfn "Postal code: %s" zip
 | otherwise                              -> printfn "Can't ship to: %s" otherwise
 ```
+
+- มี Input มากกว่า 1 และสามารถเรียกใช้แบบ Partial application
 
 ## First-class Active Patterns
 
